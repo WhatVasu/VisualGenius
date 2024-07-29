@@ -32,5 +32,5 @@ Welcome to **VisionWeb**! 🌐 An innovative web application that harnesses the 
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/VisionWeb.git
+   git clone https://github.com/VasuDevdrlg/VisionWeb.git
    cd VisionWeb
