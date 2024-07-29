@@ -6,7 +6,11 @@ Welcome to **VisionWeb**! 🌐 An innovative web application that harnesses the 
 
 
 <img align='center' src="https://graph.org/file/367fcae7945d79450d9ce.jpg" width=200px>
-#✨ Features
+
+
+
+
+##✨ Features
 
 - **Face Detection**: Real-time face detection using your webcam.
 - **Landmark Detection**: Identify and get detailed information about landmarks in images.
