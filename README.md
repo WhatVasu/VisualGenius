@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Vasudev</h1>
-<h3 align="center">A Passionate Python Developer,Currently Studyimg in TKR Engineeering College</h3>
+<h3 align="center">A Passionate Python Developer,Currently Studying at TKR Engineeering College</h3>
 
 - 🔭 I’m currently working on **VisualGenius**
 
