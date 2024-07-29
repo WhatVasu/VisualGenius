@@ -1,7 +1,7 @@
 # VisionWeb
 
 Welcome to **VisionWeb**! 🌐 An innovative web application that harnesses the power of Google Cloud Vision API to deliver advanced image processing and detection capabilities. Whether you're interested in detecting landmarks, localizing objects, or recognizing celebrities, VisionWeb has you covered!
-<img src="https://1drv.ms/i/s!AlHUgfdk68ZNixaf2IOJF8_xfKqT" width=200px>
+<img src="https://graph.org/file/367fcae7945d79450d9ce.jpg" width=200px>
 ## ✨ Features
 
 - **Face Detection**: Real-time face detection using your webcam.
