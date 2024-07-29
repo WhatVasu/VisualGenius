@@ -1,0 +1,114 @@
+body{
+  margin-top: 65px;
+  margin-left: 0px;
+
+  font-family: "Ubuntu";
+}
+
+.navhead
+{
+  height: 60px;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  align-items: center;
+  border-bottom: solid 1.25px rgb(222, 221, 221);
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 8;
+
+}
+.nav-logo img{
+  width: 62px;
+  margin-left: 16px;
+  vertical-align: middle;
+}
+.nav-logo
+{
+  margin-left: 12px;
+  display:inline-block;
+}
+.logo-name
+{
+  font-family: "Playwrite GB S", cursive;
+  font-weight: bold;
+  font-size: 21px;
+   margin-left:12px;
+}
+.nav-links
+{
+
+  list-style-type: none;
+  padding: 0px;
+  margin: 50px;
+  overflow: hidden;
+  display: inline-block;
+}
+.nav-links li{
+  float: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 14.5px;
+  margin-right: 24px;
+  transition: font-size 0.15s;
+  cursor: pointer;
+}
+.nav-links li:hover
+{
+ text-decoration: underline;
+ text-underline-offset: 200;
+ text-underline-position: below;
+ color: rgb(137, 24, 243);
+ font-size: 15px;
+}
+
+
+.navsrch {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  position: relative;
+   border: solid 1.4px rgb(224, 220, 220);
+   border-radius: 8px;
+   width: 220px;
+   margin-left: 5px;
+}
+.nav-search
+{
+  position: relative;
+  margin-left:85px;
+
+}
+a{
+  color: black;
+    text-decoration: none;
+
+}
+.analyze
+{
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border: none;
+  color: white;
+  margin-left: 18px;
+  border-radius: 6px;
+  background-color: rgb(137, 24, 243);
+  transition: all 0.25s;
+  cursor: pointer;
+}
+.analyze:hover
+{
+  background-color: white;
+  color: black;
+  border: solid 1.4px rgb(224, 220, 220);
+  border-radius: 8px;
+}
+.upbt
+{
+  width: 43px;
+  margin-left: 20px;
+}
