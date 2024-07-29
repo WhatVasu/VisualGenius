@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Celeb Detection Results</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/navbar.css')}}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            margin-top:60px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading Styles */
+        .container h1, .container h2 {
+            color: #444;
+            font-size: 28px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Image Styles */
+        .container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* Results List */
+        .container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .container li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .container li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="navhead">
+         <div class="nav-logo">
+          <img src="{{url_for('static',filename='images/VisualGeniuslonly.png')}}">
+          <span class="logo-name">Visual Genius</span>
+         </div>
+          <ul class="nav-links">
+            <li><a href="/index">Home</a></li>
+            <li>Documentation</li>
+            <li>Team</li>
+            <li>About</li>
+          </ul>
+          <div class="nav-search">
+            <form action="/Celebdetect" method="post" enctype="multipart/form-data">
+              <input type="search" placeholder="Paste Image URL" class="navsrch" name="image_url">
+              <input type="submit" class="analyze" value="Analyze">
+              <div style="position: absolute; top: 9.2px; left: 8px;">
+                <img src="{{url_for('static',filename='images/search.svg')}}" width="20px;">
+              </div>
+            </form>
+          </div>
+          <button style="background-color: white; border: none;">
+            <img class="upbt" src="{{url_for('static', filename='images/cloud-upload-signal-svgrepo-com.svg')}}">
+          </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Face Detection and Web Entities Results</h1>
+
+        {% if web_entities %}
+
+        <img src="data:image/png;base64,{{ img_str }}" alt="Image with Bounding Boxes" width="350">
+        <h2>Detected Faces:</h2>
+        <ul>
+            {% for entity in web_entities %}
+            <li>{{ entity.description }} (Score: {{ entity.score }})</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

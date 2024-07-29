@@ -1,0 +1,9 @@
+{% extends "objec.html" %}
+{% block inputform %}
+<form action="/objec" method="post" enctype="multipart/form-data">
+        <label for="image_file">Upload Image:</label>
+        <input type="file" name="image_file" accept="image/*">
+        <br>
+        <input type="submit" value="Localize Objects">
+    </form>
+{% endblock %}

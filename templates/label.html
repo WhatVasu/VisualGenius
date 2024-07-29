@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>image describer</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/navbar.css')}}">
+</head>
+<body>
+    <nav>
+        <div class="navhead">
+         <div class="nav-logo">
+          <img src="{{url_for('static',filename='images/VisualGeniuslonly.png')}}">
+          <span class="logo-name">Visual Genius</span>
+         </div class="navli">
+          <ul class="nav-links">
+            <li>
+         <a href="/index">Home</a>
+            <li>
+              Documentation
+            </li>
+            <li>
+              Team
+            </li>
+            <li>About</li>
+          </ul>
+          <div class="nav-search">
+            <form action="/label" method="post" enctype="multipart/form-data">
+              <input type="search" placeholder="Paste Image URL" class="navsrch" name="image_url" method="post" enctype="multipart/form-data" >
+              <input type="submit" class="analyze" value="Analyze">
+              <div style="position: absolute;
+              top: 9.2px;
+              left: 8px;">
+                <img src="{{url_for('static',filename='images/search.svg')}}" width="20px;">
+    
+              </div>
+            </form>
+                </div>
+                <button style="background-color: white; border: none;"><img class="upbt" src="{{url_for('static', filename='images/cloud-upload-signal-svgrepo-com.svg')}}"></button>
+                </div>
+      </nav>
+<div class="container">
+    {% if lab_results %}
+    <div class="results">
+        <h2>Uploaded Image</h2>
+        <img src="{{ image_url }}" alt="Image from URL" width="300">
+    </div>
+    {% endif %}
+    <div class="inputform">
+        {% block inputform %}
+        <h2>Image Description</h2>
+        <form >
+        <label for="image_url">Image URL:</label>
+        <input type="text" name="image_url">
+        <br>
+        <label for="image_file">Upload Image:</label>
+        <input type="file" name="image_file" accept="image/*">
+        <br>
+        <input type="submit" value="Detect Labels">
+    </form>
+        {% endblock %}
+    </div>
+</div>
+{% if lab_results %}
+<h2 class="rs">Image Labels</h2>
+<ul class="object-list">
+    {% for obj in lab_results %}
+    <li><span class="obj">{{ obj }}</span></li>
+    {% endfor %}
+</ul>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>2. Objects Finder</h2>
+    <form action="/objec" method="post">
+        <label for="image_url">Enter image URL:</label>
+        <input type="text" id="image_url" name="image_url">
+        <button style="background-color: aqua; color: black;" type="submit">Find Objects</button>
+    </form>
+<hr>
+    {% if object_results %}
+        <h2 style="color: blue;">Object Localization Results</h2>
+        <img src="{{ image_url }}" alt="Image from URL" width="300">
+        <ul >
+            {% for obj in object_results %}
+                <li style="color: aqua;">{{ obj.name }}: Confidence: {{ obj.confidence }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

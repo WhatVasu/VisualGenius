@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Describer</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/navbar.css')}}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        /* Results Section */
+        .results {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .results h2 {
+            color: #444;
+            font-size: 28px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .results img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .results ol {
+            list-style: decimal;
+            padding-left: 20px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .results li {
+            margin-bottom: 15px;
+        }
+
+        .results strong {
+            display: block;
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        /* Error Section */
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .error p {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        /* Input Form */
+        .inputform {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .inputform:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .inputform h2 {
+            margin-top: 0;
+            color: #444;
+            font-size: 28px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .inputform label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .inputform input[type="text"],
+        .inputform input[type="file"],
+        .inputform input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .inputform input[type="text"]:focus,
+        .inputform input[type="file"]:focus,
+        .inputform input[type="submit"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+
+        .inputform input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .inputform input[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .inputform input[type="submit"]:active {
+            background-color: #004494;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="navhead">
+            <div class="nav-logo">
+                <img src="{{url_for('static',filename='images/VisualGeniuslonly.png')}}">
+                <span class="logo-name">Visual Genius</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/index">Home</a></li>
+                <li>Documentation</li>
+                <li>Team</li>
+                <li>About</li>
+            </ul>
+            <div class="nav-search">
+                <form action="/landmark" method="post" enctype="multipart/form-data">
+                    <input type="search" placeholder="Paste Image URL" class="navsrch" name="image_url">
+                    <input type="submit" class="analyze" value="Analyze">
+                    <div style="position: absolute; top: 9.2px; left: 8px;">
+                        <img src="{{url_for('static',filename='images/search.svg')}}" width="20px;">
+                    </div>
+                </form>
+            </div>
+            <button style="background-color: white; border: none;">
+                <img class="upbt" src="{{url_for('static', filename='images/cloud-upload-signal-svgrepo-com.svg')}}">
+            </button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="inputform">
+            <h2>Landmark Detection</h2>
+            <form action="/landmark" method="post" enctype="multipart/form-data">
+                <label for="image_file">Upload Image:</label>
+                <input type="file" name="image_file" accept="image/*">
+                <input type="submit" value="Detect Landmark">
+            </form>
+        </div>
+        {% if land_results %}
+        <div class="results">
+            <h2>Uploaded Image</h2>
+            {% if uploaded_image_url %}
+            <img src="{{ uploaded_image_url }}" alt="Uploaded Image" width="300">
+            {% elif image_url %}
+            <img src="{{ image_url }}" alt="Image from URL" width="300">
+            {% endif %}
+            <ol>
+                {% for ld in range(n) %}
+                <li>
+                    <strong>{{ land_results[ld].description }}</strong>
+                    <p>{{ info[ld] }}</p>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+        {% elif error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

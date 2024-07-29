@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link rel="stylesheet" href="{{url_for('static', filename='css/navbar.css')}}">
+</head>
+<style>
+    /* General Styles */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 40px;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Form Section */
+.inputform {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputform:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.inputform h2 {
+    margin-top: 0;
+    color: #444;
+    font-size: 28px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.inputform label {
+    display: block;
+    margin: 15px 0 5px;
+    color: #666;
+    font-weight: bold;
+}
+
+.inputform input[type="file"],
+.inputform input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputform input[type="file"]:focus,
+.inputform input[type="submit"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
+.inputform input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.inputform input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Results Section */
+.results {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.results:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.results h2 {
+    margin-top: 0;
+    color: #444;
+    font-size: 28px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.results img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 15px;
+    border: 2px solid #ddd;
+}
+
+.results p {
+    color: #555;
+    line-height: 1.8;
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+</style>
+<body>
+    <nav>
+        <div class="navhead">
+         <div class="nav-logo">
+          <img src="{{url_for('static',filename='images/VisualGeniuslonly.png')}}">
+          <span class="logo-name">Visual Genius</span>
+         </div class="navli">
+          <ul class="nav-links">
+            <li>
+         <a href="/index">Home</a>
+            </li>
+            <li>
+              Documentation
+            </li>
+            <li>
+              Team
+            </li>
+            <li>About</li>
+          </ul>
+          <div class="nav-search">
+            <form action="/doctext" method="post" enctype="multipart/form-data">
+              <input type="search" placeholder="Paste Image URL" class="navsrch" name="image_url" method="post" enctype="multipart/form-data" >
+              <input type="submit" class="analyze" value="Analyze">
+              <div style="position: absolute;
+              top: 9.2px;
+              left: 8px;">
+                <img src="{{url_for('static',filename='images/search.svg')}}" width="20px;">
+    
+              </div>
+            </form>
+                </div>
+                <button style="background-color: white; border: none;"><img class="upbt" src="{{url_for('static', filename='images/cloud-upload-signal-svgrepo-com.svg')}}"></button>
+                </div>
+      </nav>
+<div class="container">
+    <div class="inputform">
+        {% block inputform %}
+        <h2>Text Extractor</h2>
+        <form >
+
+        <label for="image_file">Upload Image:</label>
+        <input type="file" name="image_file" accept="image/*">
+        <br>
+        <input type="submit" value="Detect Document Text">
+    </form>
+        {% endblock %}
+    </div>
+</div>
+{% if text_results %}
+<div class="results">
+     <h2>Uploaded Image</h2>
+     <img src="{{ image_url }}" alt="Image from URL" width="300">
+    <h2>Extracted Text</h2>
+    <p>{{ text_results }}</p>
+    <h2>Translated Text:</h2>
+    <p>{{trans}}</p>
+</div>
+{% endif %}
+</body>
+</html>
