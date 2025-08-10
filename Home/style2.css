@@ -1,0 +1,14 @@
+button
+    {
+      padding: 12px; 
+      color: black;
+      background-color: aqua; 
+      border: none; 
+      border-radius: 5px; 
+      margin-left: 180px;
+      cursor: pointer;
+    }
+button:hover{
+  border: solid;
+  background-color: aquamarine;
+}
